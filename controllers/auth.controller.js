@@ -26,7 +26,7 @@ exports.loginUser = (req, res) => {
             }
             const newDataLogin = new Date();
             const dataChangeQuery = "UPDATE users SET date_last_login=? WHERE id=?"
-            db.query(dataChangeQuery, [newDataLogin, user.id], (err, data) =>{
+            db.query(dataChangeQuery, [+newDataLogin, user.id], (err, data) =>{
                 if (err) { return res.status(500).send(err); }
 
                 const token = jwt.sign(

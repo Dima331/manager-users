@@ -5,12 +5,13 @@ import Container from 'react-bootstrap/Container';
 import { AuthContext } from './context/Auth.context';
 import { useAuth } from './hooks/auth.hook';
 import { Loader } from './components/Loader';
+import { Navigation } from './components/Navbar';
 
 function App() {
   const { token, login, logout, userId, ready } = useAuth()
   const isAuthenticated = !!token
   const routes = useRouters(isAuthenticated)
-
+  
   if (!ready) {
     return <Loader />
   }
@@ -20,6 +21,9 @@ function App() {
       token, login, logout, userId, isAuthenticated
     }}>
       <BrowserRouter>
+        <Navigation 
+          isAuthenticated = {isAuthenticated} 
+          userLogin = {userId}/>
         <Container>
           {routes}
         </Container>
