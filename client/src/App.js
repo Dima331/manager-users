@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import { AuthContext } from './context/Auth.context';
 import { useAuth } from './hooks/auth.hook';
 import { Loader } from './components/Loader';
-import { Navigation } from './components/Navbar';
+import { Navigation } from './components/Navigation';
 
 function App() {
   const { token, login, logout, userId, ready } = useAuth()
