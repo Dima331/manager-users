@@ -24,11 +24,9 @@ exports.loginUser = (req, res) => {
             if(!user.status){
                 return res.status(400).json({ message: "This user was block" })
             }
-            let newDataLogin = new Date();
-            newDataLogin = newDataLogin.toLocaleString()
-
+            const newDataLogin = new Date();
             const dataChangeQuery = "UPDATE users SET date_last_login=? WHERE id=?"
-            db.query(dataChangeQuery, [newDataLogin, user.id], (err, data) =>{
+            db.query(dataChangeQuery, [+newDataLogin, user.id], (err, data) =>{
                 if (err) { return res.status(500).send(err); }
 
                 const token = jwt.sign(
@@ -41,3 +39,19 @@ exports.loginUser = (req, res) => {
         }
     })
 }
+exports.getUsers = (req, res) => {
+    const getUsersQuery = "SELECT id, email, login, date_last_login, date_registration, status  FROM users"; 
+    
+    db.query(getUsersQuery, (err, data) => {
+        if (err) { return res.status(500).send(err); }
+
+        return res.json(data)
+    });
+};
+
+// app.get("/api/auth/register", (req, res) => {
+//   db.query("SELECT * FROM users", function (err, data) {
+//     if (err) return console.log(err);
+//     console.log(data)
+//   });
+// });

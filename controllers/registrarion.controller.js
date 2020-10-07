@@ -20,10 +20,10 @@ exports.addUser = (req, res) => {
             const userAddQuery = "INSERT INTO users (login, email, password, status, date_registration, date_last_login) VALUES (?,?,?,?,?,?)"
             const hashedPassword = await bcrypt.hash(password, 12)
             let now = new Date();
-            console.log(+now);
-
+            now = now.toLocaleString()
+            console.log(now);
             db.query(userAddQuery,
-                [login, email, hashedPassword, 1, +now, +now], (err, data) => {
+                [login, email, hashedPassword, 1, now, now], (err, data) => {
                     if (err) { return res.status(500).send(err); }
                     const token = jwt.sign(
                         { userLog: login },

@@ -9,6 +9,7 @@ const app = express()
 app.use(bodyParser.json({ 'type': 'application/json' }))
 app.use(bodyParser.urlencoded({ 'extended': true }))
 const registration = require('./routes/registration.routes');
+const users = require('./routes/users.routes');
 const PORT = config.get('port') || 5000
 
 
@@ -26,6 +27,7 @@ db.connect((err) => {
 global.db = db;
 
 app.use('/api/auth', registration);
+app.use('/api/users', users);
 
 app.listen(PORT, () => console.log(`here port ${PORT}`))
 

@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 
-export const TableUsers = () => {
+export const TableUsers = ({ users }) => {
 
     return (
         <Row className="justify-content-md-center">
@@ -14,8 +14,8 @@ export const TableUsers = () => {
                     <thead>
                         <tr>
                             <th ><Button
-                                variant="primary"
-                            >Select all</Button>
+                                    variant="primary"
+                                >Select all</Button>
                                 <Button
                                     variant="primary"
                                 >Remove all</Button></th>
@@ -28,32 +28,19 @@ export const TableUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><Form.Check type="checkbox" /></td>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td><Form.Check type="checkbox" /></td>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td><Form.Check type="checkbox" /></td>
-                            <td>3</td>
-                            <td colSpan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
+                        {users && users.map(user => {
+                            return (
+                                <tr key={user.id}>
+                                    <td><Form.Check type="checkbox" /></td>
+                                    <td>{user.id}</td>
+                                    <td>{user.login}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.date_registration}</td>
+                                    <td>{user.date_last_login}</td>
+                                    <td>{!!+user.status ? 'not block': 'block' }</td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </Table>
             </Col>
