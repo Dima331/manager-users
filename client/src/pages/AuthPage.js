@@ -3,8 +3,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { AuthContext } from '../context/Auth.context'
+import { useHttp } from '../hooks/http.hook'
 
 export const AuthPage = () => {
+  const auth = useContext(AuthContext)
+  const { loading, request, error, clearError } = useHttp()
   const [form, setForm] = useState({
     login: '', password: ''
   })
@@ -13,6 +17,12 @@ export const AuthPage = () => {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
 
+  const loginHandler = async () => {
+    try {
+      const data = await request('/api/auth/login', 'POST', {...form})
+      auth.login(data.token, data.userLog)
+    } catch (e) {}
+  }
 
   return (
     <Row className="justify-content-md-center">
@@ -44,7 +54,9 @@ export const AuthPage = () => {
               value={form.password}
               onChange={changeHandler} />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button 
+          variant="primary" 
+          onClick={loginHandler}>
             Submit</Button>
         </Form>
       </Col>
