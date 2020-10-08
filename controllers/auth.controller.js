@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs')
-const config = require('config')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
+const config = require('config');
+const jwt = require('jsonwebtoken');
 
 exports.loginUser = (req, res) => {
     if (!req.body) {
@@ -15,23 +15,23 @@ exports.loginUser = (req, res) => {
         const user = data[0];
 
         if (data.length === 0) {
-            return res.json({ message: 'There is no such user' });
+            return res.status(400).json({ message: 'There is no such user' });
         } else {
-            const isMatch = await bcrypt.compare(password, user.password)
-
+            
+            const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
-                return res.status(400).json({ message: "Error pass and log" })
+                return res.status(400).json({ message: "Error pass and log" });
             }
-            console.log(user.status)
+            
             if (!+user.status) {
-                return res.status(400).json({ message: "This user was block" })
+                return res.status(400).json({ message: "This user was block" });
             }
 
             let newDataLogin = new Date();
-            newDataLogin = newDataLogin.toLocaleString()
+            newDataLogin = newDataLogin.toLocaleString();
 
-            const dataChangeQuery = "UPDATE users SET date_last_login=? WHERE id=?"
-            
+            const dataChangeQuery = "UPDATE users SET date_last_login=? WHERE id=?";
+
             db.query(dataChangeQuery, [newDataLogin, user.id], (err, data) => {
                 if (err) { return res.status(500).send(err); }
 
@@ -39,9 +39,10 @@ exports.loginUser = (req, res) => {
                     { userLog: login },
                     config.get('jwtSecret'),
                     { expiresIn: '1h' }
-                )
-                return res.json({ token, userLog: login, userId: user.id, status: true })
-            })
+                );
+
+                return res.json({ token, userLog: login, userId: user.id, status: true });
+            });
         }
-    })
+    });
 }

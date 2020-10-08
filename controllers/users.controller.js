@@ -4,7 +4,7 @@ exports.getUsers = (req, res) => {
     db.query(getUsersQuery, (err, data) => {
         if (err) { return res.status(500).send(err); }
 
-        return res.json(data)
+        return res.json(data);
     });
 };
 
@@ -15,34 +15,32 @@ exports.deleteUsers = (req, res) => {
     id.forEach(element => {
         db.query(deleteUserQuery, [element], (err, data) => {
             if (err) return console.log(err);
-        })
+        });
     });
     return res.status(201).json({ result: 'deleted' });
 }
 
 exports.blockUsers = (req, res) => {
     const id = req.body;
-    console.log(id)
     const blockUserQuery = 'UPDATE users SET status=? WHERE id=?';
-    const status = 0
+    const status = 0;
+
     id.forEach(element => {
         db.query(blockUserQuery, [status, element], (err, data) => {
             if (err) return console.log(err);
-            console.log(data)
-        })
+        });
     });
     return res.status(201).json({ result: 'changed' });
 }
 exports.unBlockUsers = (req, res) => {
     const id = req.body;
-    console.log(id)
     const blockUserQuery = 'UPDATE users SET status=? WHERE id=?';
-    const status = 1
+    const status = 1;
+
     id.forEach(element => {
         db.query(blockUserQuery, [status, element], (err, data) => {
             if (err) return console.log(err);
-            console.log(data)
-        })
+        });
     });
     return res.status(201).json({ result: 'changed' });
 }

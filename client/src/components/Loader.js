@@ -1,19 +1,16 @@
-import React from "react"
+import React from "react";
+import Spinner from 'react-bootstrap/Spinner';
 
 export const Loader = () => (
-    <div style={{display: 'flex', justifyContent: 'center', paddingTop: '2rem'}}>
-      <div className="preloader-wrapper active">
-        <div className="spinner-layer spinner-red-only">
-          <div className="circle-clipper left">
-            <div className="circle" />
-          </div>
-          <div className="gap-patch">
-            <div className="circle" />
-          </div>
-          <div className="circle-clipper right">
-            <div className="circle" />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+  <div className="d-flex justify-content-center" style={{
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center'
+  }}>
+    <Spinner animation="border" variant="primary">
+      <span className="sr-only">Loading...</span>
+    </Spinner>
+  </div>
+);

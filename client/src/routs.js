@@ -1,8 +1,8 @@
-import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { RegistrationPage } from './pages/RegistrationPage'
-import { AuthPage } from './pages/AuthPage'
-import {ManagerPage} from './pages/ManagerPage'
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { RegistrationPage } from './pages/RegistrationPage';
+import { AuthPage } from './pages/AuthPage';
+import { ManagerPage } from './pages/ManagerPage';
 
 export const useRouters = isAuthenticated => {
     if (isAuthenticated) {

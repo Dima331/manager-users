@@ -1,65 +1,63 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
-import { CheckBox } from './CheckBox'
-import Form from 'react-bootstrap/Form';
-import { check } from 'express-validator';
-
+import { CheckBox } from './CheckBox';
 
 export const TableUsers = ({ users, pick }) => {
   const [checked, setChecked] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
-  const [ChangeMe, setChangeMe] = useState(false);
+  const [stateSelect, setStateSelect] = useState(false);
 
   useEffect(() => {
-    users.forEach(element => {
+    users.forEach(user => {
       setChecked(prev => ([
         ...prev, {
-          id: element.id,
+          id: user.id,
           press: false
         }
-      ]))
+      ]));
     });
-  }, [])
-
-
-  const putCheckBoxHandler = (e) => {
-    setChecked(checked.map(item => {
-      if (item.id === +e.target.value) {
-        return {
-          id: item.id,
-          press: !item.press
-        }
-      }
-      return item
-    }))
-    setChangeMe(true)
-  }
+  }, [users]);
 
   useEffect(() => {
-    console.log(checked)
-    let arr = []
-    checked.filter(item => {
-      if(item.press) {
-        arr.push(item.id)
-        return item.id
+    let sendStateCheck = [];
+    
+    checked.filter(checkBox => {
+      if(checkBox.press) {
+        sendStateCheck.push(checkBox.id)
+        return checkBox.id
       }
+      return false
     })
-    pick(arr)
-    setChangeMe(false)
-  }, [ChangeMe])
 
-  const emphasise  = () => {
-    setChecked(checked.map(item => {
+    pick(sendStateCheck);
+    setStateSelect(false);
+  }, [stateSelect, checked]); 
+
+  const emphasise = () => {
+    setChecked(checked.map(checkBox => {
       return {
-        id: item.id,
+        id: checkBox.id,
         press: !selectAll
       }
     }))
-    setSelectAll(!selectAll)
-    setChangeMe(true)
+    setSelectAll(!selectAll);
+    setStateSelect(true);
+  }
+
+  const putCheckBoxHandler = e => {
+    setChecked(checked.map(checkBox => {
+      if (checkBox.id === +e.target.value) {
+        return {
+          id: checkBox.id,
+          press: !checkBox.press
+        };
+      }
+      return checkBox;
+    }))
+    setStateSelect(true)
   }
 
   return (
@@ -68,13 +66,10 @@ export const TableUsers = ({ users, pick }) => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th ><Button
-                variant="primary"
+              <th><Button
+                variant="info"
                 onClick={emphasise}
-              >Select all</Button>
-                <Button
-                  variant="primary"
-                >Remove all</Button></th>
+              >Select all</Button></th>
               <th>id</th>
               <th>Login</th>
               <th>Email</th>
@@ -88,15 +83,8 @@ export const TableUsers = ({ users, pick }) => {
               return (
                 <tr key={user.id}>
                   <td>
-                    {/* <Form.Check
-                    type="checkbox"
-                    name={checked[i]}
-                    onClick={(e) => pick(e)}
-                    checked={checked[i]}
-                    value={checked[i]}
-                  /> */}
                     <CheckBox
-                      check={checked[i]}
+                      user={checked[i]}
                       checkHandler={putCheckBoxHandler}
                     />
                   </td>

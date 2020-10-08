@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -14,15 +14,18 @@ export const ToolBar = ({deleteUser, block, unBlock}) => {
                 <Button
                     variant="primary"
                     onClick={block}
+                    style={{ marginRight: '20px'}}
                 ><ShieldFillX color="#00ff09" size={34} /></Button>
                 <Button
                     variant="primary"
                     onClick={unBlock}
-                ><ShieldFillCheck color="#00ff09" size={34}/></Button>
+                    style={{ marginRight: '20px'}}
+                ><ShieldFillCheck color="yellow" size={34}/></Button>
                 <Button
                     variant="primary"
                     onClick={deleteUser}
-                ><ArchiveFill   color="#00ff09" size={34}/></Button>
+                    style={{ marginRight: '20px'}}
+                ><ArchiveFill   color="#fff" size={34}/></Button>
                 
             </Col>
         </Row>

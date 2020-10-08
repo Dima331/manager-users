@@ -1,6 +1,6 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
-function plug() { }
+function plug() { };
 
 export const AuthContext = createContext({
     token: null,
@@ -8,4 +8,4 @@ export const AuthContext = createContext({
     login: plug,
     logout: plug,
     isAuthenticated: false
-  })
+  });

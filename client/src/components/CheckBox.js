@@ -1,17 +1,16 @@
-import React from 'react'
-import Form from 'react-bootstrap/Form';
+import React from 'react';
 
-export const CheckBox = ({ check, checkHandler }) => {
+export const CheckBox = ({ user, checkHandler }) => {
   return (
     <>
-      {check
+      {user
         &&
         <input
-          key={check.id}
+          key={user.id}
           onChange={checkHandler}
           type="checkbox"
-          checked={check.press}
-          value={check.id} />
+          checked={user.press}
+          value={user.id} />
       }
     </>
   )
