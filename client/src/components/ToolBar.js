@@ -6,7 +6,7 @@ import { ArchiveFill } from 'react-bootstrap-icons';
 import { ShieldFillX } from 'react-bootstrap-icons';
 import { ShieldFillCheck } from 'react-bootstrap-icons';
 
-export const ToolBar = () => {
+export const ToolBar = ({deleteUser}) => {
 
     return (
         <Row className="justify-content-md-center">
@@ -19,6 +19,7 @@ export const ToolBar = () => {
                 ><ShieldFillCheck color="#00ff09" size={34}/></Button>
                 <Button
                     variant="primary"
+                    onClick={deleteUser}
                 ><ArchiveFill   color="#00ff09" size={34}/></Button>
                 
             </Col>

@@ -20,7 +20,7 @@ export const AuthPage = () => {
   const loginHandler = async () => {
     try {
       const data = await request('/api/auth/login', 'POST', {...form})
-      auth.login(data.token, data.userLog)
+      auth.login(data.token, data.userLog, data.userId)
     } catch (e) {}
   }
 

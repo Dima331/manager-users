@@ -17,11 +17,11 @@ export const RegistrationPage = () => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
-    const registerHandler = async () => {
+    const registerHandler = async (e) => {
+        e.preventDefault()
         try {
             const data = await request('/api/auth/register', 'POST', { ...form })
-            console.log(data)
-            auth.login(data.token, data.userLog)
+            auth.login(data.token, data.userLog, data.userId)
         } catch (e) { }
     }
 
@@ -29,7 +29,7 @@ export const RegistrationPage = () => {
         <Row className="justify-content-md-center">
             <Col xs lg="6" className=" mt-5">
                 <h1>Registration</h1>
-                <Form >
+                <Form onSubmit={(e) => registerHandler(e)}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
@@ -73,8 +73,8 @@ export const RegistrationPage = () => {
                     </Form.Group>
                     <Button 
                         variant="primary" 
-                        onClick={registerHandler}
-                        // type='submit'
+                        // onClick={registerHandler}
+                        type='submit'
                     >
                         Submit</Button>
                 </Form>

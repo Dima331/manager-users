@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 
-export const TableUsers = ({ users }) => {
+export const TableUsers = ({ users, pick }) => {
 
     return (
         <Row className="justify-content-md-center">
@@ -31,7 +31,11 @@ export const TableUsers = ({ users }) => {
                         {users && users.map(user => {
                             return (
                                 <tr key={user.id}>
-                                    <td><Form.Check type="checkbox" /></td>
+                                    <td><Form.Check 
+                                            type="checkbox" 
+                                            name={user.id}
+                                            onClick={(e) => pick(e)}
+                                        /></td>
                                     <td>{user.id}</td>
                                     <td>{user.login}</td>
                                     <td>{user.email}</td>
