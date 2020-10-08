@@ -27,15 +27,17 @@ export const ManagerPage = () => {
         getUsers()
     }, [getUsers])
 
-    const pickUserHandler = (e) => {
-        if (select.indexOf(e.target.name) === -1) {
-            setSelect([...select, e.target.name])
-        }
-        if (select.indexOf(e.target.name) !== -1) {
-            let tmpSelect = select
-            tmpSelect.splice(select.indexOf(e.target.name), 1);
-            setSelect(tmpSelect)
-        }
+    const pickUserHandler = (arr) => {
+        // if (select.indexOf(e.target.name) === -1) {
+        //     setSelect([...select, e.target.name])
+        // }
+        // if (select.indexOf(e.target.name) !== -1) {
+        //     let tmpSelect = select
+        //     tmpSelect.splice(select.indexOf(e.target.name), 1);
+        //     setSelect(tmpSelect)
+        // }
+        console.log(arr)
+        setSelect(arr)
     }
 
     const deleteUserHandler = async () => {
@@ -53,11 +55,60 @@ export const ManagerPage = () => {
                 });
                 if(!currentUser.length){
                     await getUsers()
+                    setSelect([])
                 }
             } catch (e) { }
         }
-
     }
+
+    
+    const BlockUserHandler =  async () => {
+        if (select.length !== 0) {
+            try {
+                const data = await request('/api/users/block', 'POST', select, {
+                    Authorization: `Bearer ${token}`
+                })
+                await getUsers()
+                setSelect([])
+                const currentUser = select.filter(element => {
+                    console.log(auth.userId, element)
+                    if(auth.userId === +element){
+                        auth.logout()
+                        return true
+                    }
+                });
+                if(!currentUser.length){
+                    await getUsers()
+                }
+            } catch (e) { }
+        }
+    }
+
+    const unBlockUserHandler = async () => {
+        if (select.length !== 0) {
+            try {
+                const data = await request('/api/users/unblock', 'POST', select, {
+                    Authorization: `Bearer ${token}`
+                })
+                await getUsers()
+                setSelect([])
+                // const currentUser = select.filter(element => {
+                //     console.log(auth.userId, element)
+                //     if(auth.userId === +element){
+                //         auth.logout()
+                //         return true
+                //     }
+                // });
+                // if(!currentUser.length){
+                //     await getUsers()
+                // }
+            } catch (e) { }
+        }
+    }
+
+
+
+
 
     if (loading) {
         return (
@@ -73,6 +124,8 @@ export const ManagerPage = () => {
         <>
             <ToolBar
                 deleteUser={deleteUserHandler}
+                unBlock={unBlockUserHandler}
+                block={BlockUserHandler}
             />
             {users &&
                 <TableUsers

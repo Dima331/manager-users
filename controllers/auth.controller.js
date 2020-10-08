@@ -22,7 +22,8 @@ exports.loginUser = (req, res) => {
             if (!isMatch) {
                 return res.status(400).json({ message: "Error pass and log" })
             }
-            if (!user.status) {
+            console.log(user.status)
+            if (!+user.status) {
                 return res.status(400).json({ message: "This user was block" })
             }
 

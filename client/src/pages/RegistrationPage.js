@@ -40,7 +40,6 @@ export const RegistrationPage = () => {
                             value={form.email}
                             onChange={changeHandler}
                         />
-                        <Form.Text className="text-muted" >  We'll never share your email with anyone else.</Form.Text>
                     </Form.Group>
                     <Form.Group controlId="formBasicLogin">
                         <Form.Label>Login</Form.Label>
@@ -54,10 +53,6 @@ export const RegistrationPage = () => {
                             value={form.login}
                             onChange={changeHandler}
                         />
-                        <Form.Text
-                            className="text-muted"
-                        >
-                            We'll never share your email with anyone else.</Form.Text>
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
