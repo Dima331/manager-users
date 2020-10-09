@@ -75,7 +75,11 @@ export const ManagerPage = () => {
       await getUsers();
     }
   }
-
+  if (loading) {
+    return (
+        <Loader />
+    )
+  }
   return (
     <>
       <ToolBar
