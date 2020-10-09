@@ -14,7 +14,7 @@ export const ManagerPage = () => {
 
   const getUsers = useCallback(async () => {
     try {
-      const fetched = await request(`/api/users`, 'GET', null, {
+      const fetched = await request(`/api/users/get`, 'GET', null, {
         Authorization: `Bearer ${auth.token}`
       });
       setUsers(fetched);
