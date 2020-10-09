@@ -4,7 +4,7 @@ import { ToolBar } from '../components/ToolBar';
 import { TableUsers } from '../components/TableUsers';
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/Auth.context';
-import { Loader } from './components/Loader';
+import { Loader } from '../components/Loader';
 
 export const ManagerPage = () => {
   const { request, loading } = useHttp();
