@@ -9,8 +9,11 @@ app.use(bodyParser.urlencoded({ 'extended': true }));
 
 const registration = require('./routes/registration.routes');
 const users = require('./routes/users.routes');
-const PORT = config.get('port') || 5000;
+// const PORT = config.get('port') || 5000;
+const PORT = process.env.PORT || 5000;
 
+const buildPath = path.join(__dirname, '..', 'build');
+app.use(express.static(buildPath));
 
 const db = mysql.createConnection({
   host: "eu-cdbr-west-03.cleardb.net",

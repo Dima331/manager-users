@@ -14,7 +14,7 @@ function App() {
   const isAuthenticated = !!token;
   const routes = useRouters(isAuthenticated);
   
-  if (!ready && !loading) {
+  if (!ready) {
     return <Loader />
   }
 
