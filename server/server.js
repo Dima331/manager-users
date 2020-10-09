@@ -9,6 +9,8 @@ const path = require('path');
 
 const buildPath = path.join(__dirname, '..', 'build');
 app.use(express.static(buildPath));
+app.use('/api/auth', registration);
+app.use('/api/users', users);
 // const PORT = config.get('port') || 5000;
 app.get('*', function (request, response){
   response.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
@@ -32,9 +34,6 @@ const db = mysql.createPool({
 //   console.log('Connected to database');
 // });
 global.db = db;
-
-app.use('/api/auth', registration);
-app.use('/api/users', users);
 
 app.listen(PORT, () => console.log(`here port ${PORT}`));
 
