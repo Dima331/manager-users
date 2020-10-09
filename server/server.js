@@ -9,17 +9,16 @@ const path = require('path');
 
 const buildPath = path.join(__dirname, '..', 'build');
 app.use(express.static(buildPath));
+app.use(bodyParser.json({ 'type': 'application/json' }));
+app.use(bodyParser.urlencoded({ 'extended': true }));
 app.use('/api/auth', registration);
 app.use('/api/users', users);
+const PORT = process.env.PORT || 5000;
+
 // const PORT = config.get('port') || 5000;
 app.get('*', function (request, response){
   response.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
 })
-
-const PORT = process.env.PORT || 5000;
-app.use(bodyParser.json({ 'type': 'application/json' }));
-app.use(bodyParser.urlencoded({ 'extended': true }));
-
 
 const db = mysql.createPool({
   connectionLimit : 30,
