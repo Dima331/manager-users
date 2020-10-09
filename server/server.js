@@ -13,10 +13,10 @@ const PORT = config.get('port') || 5000;
 
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "manager",
-  password: "root"
+  host: "eu-cdbr-west-03.cleardb.net",
+  user: "b7d5fcc0dab453",
+  database: "heroku_834f816ce945ec4",
+  password: "fc773d3c"
 });
 //mysql://b7d5fcc0dab453:fc773d3c@eu-cdbr-west-03.cleardb.net/heroku_834f816ce945ec4?reconnect=true
 db.connect((err) => {
