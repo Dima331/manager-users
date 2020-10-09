@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const registration = require('./routes/registration.routes');
 const users = require('./routes/users.routes');
+const path = require('path');
 
 const buildPath = path.join(__dirname, '..', 'build');
 app.use(express.static(buildPath));
