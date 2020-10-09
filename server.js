@@ -18,7 +18,7 @@ const db = mysql.createConnection({
   database: "manager",
   password: "root"
 });
-
+//mysql://b7d5fcc0dab453:fc773d3c@eu-cdbr-west-03.cleardb.net/heroku_834f816ce945ec4?reconnect=true
 db.connect((err) => {
   if (err) { throw err; }
   console.log('Connected to database');
